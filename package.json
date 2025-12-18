@@ -2,6 +2,7 @@
   "name": "vscode-fcr-insight-companion",
   "displayName": "FCR Insight Companion",
   "description": "VS Code extension integrating GitHub MCP tools and PR Code Review",
+  "icon": "resources/icon.svg",
   "version": "0.0.1",
   "publisher": "fcr-insight",
   "repository": {
@@ -21,6 +22,7 @@
     "chatParticipants": [
       {
         "id": "fcr-insight.assistant",
+        "icon": "resources/icon.svg",
         "name": "work",
         "description": "Unified Work Assistant for GitHub, Jira, and Confluence",
         "isSticky": true,
