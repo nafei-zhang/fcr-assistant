@@ -1,6 +1,13 @@
 import * as vscode from 'vscode';
 import { BUILTIN_PROMPTS } from '../../config/prompts';
 
+interface ReviewComment {
+    path: string;
+    body: string;
+    line?: number;
+    side?: 'LEFT' | 'RIGHT';
+}
+
 export async function handleReviewCommand(request: vscode.ChatRequest, octokit: any, stream: vscode.ChatResponseStream, token: vscode.CancellationToken) {
     const prompt = request.prompt;
     
@@ -114,7 +121,6 @@ export async function handleReviewCommand(request: vscode.ChatRequest, octokit: 
             }
         }
 
-        let userPrompt = '';
         const promptKeyMatch = prompt.match(/prompt:\s*([\w]+)/i);
         const customPromptMatch = prompt.match(/prompt:\s*"(.*?)"/);
         
@@ -199,15 +205,15 @@ export async function handleReviewCommand(request: vscode.ChatRequest, octokit: 
              const jsonMatch = fullResponse.match(/```json\n([\s\S]*?)\n```/);
              if (jsonMatch) {
                  try {
-                     const comments = JSON.parse(jsonMatch[1]);
-                     if (Array.isArray(comments) && comments.length > 0) {
-                         stream.markdown('\n\n**Detected Review Comments:**\n');
-                         stream.markdown('You can apply these comments by running the following commands:\n');
-                         
-                         for (const comment of comments) {
-                             if (comment.path && comment.body) {
-                                 const lineArg = comment.line ? ` line:${comment.line}` : '';
-                                 const sideArg = comment.side ? ` side:${comment.side}` : '';
+                    const comments = JSON.parse(jsonMatch[1]) as ReviewComment[];
+                    if (Array.isArray(comments) && comments.length > 0) {
+                        stream.markdown('\n\n**Detected Review Comments:**\n');
+                        stream.markdown('You can apply these comments by running the following commands:\n');
+                        
+                        for (const comment of comments) {
+                            if (comment.path && comment.body) {
+                                const lineArg = comment.line ? ` line:${comment.line}` : '';
+                                const sideArg = comment.side ? ` side:${comment.side}` : '';
                                  // Escape quotes in body
                                  const escapedBody = comment.body.replace(/"/g, '\\"');
                                  
