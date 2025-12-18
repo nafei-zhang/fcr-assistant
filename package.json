@@ -38,6 +38,14 @@
           {
             "name": "gh-comment",
             "description": "Add a review comment to a Pull Request"
+          },
+          {
+            "name": "jira",
+            "description": "Interact with Jira (search, create issue, etc.)"
+          },
+          {
+            "name": "confluence",
+            "description": "Interact with Confluence (search, get page, etc.)"
           }
         ]
       }
@@ -59,6 +67,21 @@
         "fcr-insight.GITHUB_ENTERPRISE_URL": {
           "type": "string",
           "description": "GitHub Enterprise URL (e.g. https://github.example.com)",
+          "scope": "application"
+        },
+        "fcr-insight.atlassian.domain": {
+          "type": "string",
+          "description": "Atlassian Domain (e.g. https://your-domain.atlassian.net)",
+          "scope": "application"
+        },
+        "fcr-insight.atlassian.email": {
+          "type": "string",
+          "description": "Atlassian Email Address",
+          "scope": "application"
+        },
+        "fcr-insight.atlassian.token": {
+          "type": "string",
+          "description": "Atlassian API Token",
           "scope": "application"
         },
         "fcr-insight.defaultOwner": {

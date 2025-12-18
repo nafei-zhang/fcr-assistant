@@ -12,9 +12,9 @@ export async function handleGeneralQuery(request: vscode.ChatRequest, octokit: a
     stream.markdown('- `/gh-search <query>`: Search for code\n');
     stream.markdown('- `/gh-comment ...`: Add a comment to a PR\n');
     
-    stream.markdown('\n**Jira (Coming Soon)**\n');
-    stream.markdown('- `/jira-issue <key>`: View/Update Jira issue\n');
+    stream.markdown('\n**Jira**\n');
+    stream.markdown('- `/jira <request>`: Interact with Jira (e.g. "find bugs in PROJ", "create task")\n');
     
-    stream.markdown('\n**Confluence (Coming Soon)**\n');
-    stream.markdown('- `/confluence-search <query>`: Search wiki pages\n');
+    stream.markdown('\n**Confluence**\n');
+    stream.markdown('- `/confluence <request>`: Interact with Confluence (e.g. "search meeting notes")\n');
 }
